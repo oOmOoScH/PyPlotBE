@@ -15,21 +15,51 @@ from numba import jit
 from numpy import arange
 import time
 
-def file_name(file_dir):   
-        
-        Data=open(r"C:\Users\ScHWorkStation\Desktop\DataMark_ZJYY_FilePath.txt","w")
-        for root, dirs, files in os.walk(file_dir):
-            print(root) #当前目录路径
-            # print(dirs) #当前路径下所有子目录  
-            # print(files) #当前路径下所有非目录子文件  
+#Define List
+DirsData=[]
 
-            Data.write(root+'\n')
+
+
+def Config_Write(FileDataNum):   
+        
+        # Data=open(r"C:\Users\ScHWorkStation\Desktop\DataMark_ZJYY_FilePath.txt","w")
+        print(FileDataNum)
+        Data=open(r"C:\Users\ScHWorkStation\Desktop\DataMark_ZJYY.txt","w")
+
+        Data.write('Data_Mark'+'\n')
+        Data.write('Total：'+str(FileDataNum)+'\n')
+        for i in range(FileDataNum):
+            
+            Data.write(DirsData[0][i][0:10]+'\n')
+            
 
         Data.close()  
 
 
+def file_name(file_dir):   
+        
+    for root, dirs, files in os.walk(file_dir):
+            # print(root) #当前目录路径
+            # print(dirs) #当前路径下所有子目录  
+            # print(files) #当前路径下所有非目录子文件  
+            root
+            dirs
+            DirsData.append(dirs)
+            files
+    
+    # print(len(DirsData[0]))
+    # print(DirsData[0][1][0:10])
 
-def BCG_CsV_FilePath_Input():
+
+    Config_Write(len(DirsData[0]))
+     
+        
+
+
+
+
+
+def Download_ConfigFile_Input():
     FileDirPath=input('Please Input the FileDirPath:')
     print(FileDirPath)
 
@@ -44,4 +74,5 @@ def BCG_CsV_FilePath_Input():
 if __name__ == '__main__':
 
     # while(1):
-        BCG_CsV_FilePath_Input()
+    Download_ConfigFile_Input()
+    
