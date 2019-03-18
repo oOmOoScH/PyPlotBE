@@ -204,8 +204,10 @@ def DeviceProcesses(PlotNum):
         DeviceProcesses.append(t)
         t.start()
 
-        if i == (int(PlotNum)-1):
-            t.join()
+    for res in DeviceProcesses:
+        res.join()  
+
+
 
 
 

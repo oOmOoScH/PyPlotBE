@@ -53,11 +53,12 @@ def BCG_CsV_File_Plot():
     fig=plt.figure()
     #fig1
     ax1=fig.add_subplot(2,1,1)  
+    # ax1=fig.add_subplot(1,1,1)  
     ax1.plot(BCGX,BCGY)
     ax1.grid(color='black', linestyle='--', linewidth=1,alpha=0.3)
     ax1.set_title(BCGxlabel[0])
 
-    #fig2
+    # fig2
     ax2=fig.add_subplot(2,1,2)
     ax2.plot(BCGY)
     ax2.grid(color='black', linestyle='--', linewidth=1,alpha=0.3)
