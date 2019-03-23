@@ -171,15 +171,18 @@ def BCG_Time_Input():
     print(TimeYM)
 
     print("The StartTime Day & The EndTime Day")
-    print("If (The StartTime Day) < (The EndTime Day),Input the 1.")
+    print("Yesterday_To_Today, Input the 1.")
+    print("Self_Define_the_Day,Input the 2.")
+    
     TimeDayFlag=input()
     TimeDayTemp=time.strftime('%d',time.localtime(time.time()))
     print(TimeDayFlag)
         # print("The example  is: 01-02")
     if(TimeDayFlag=="1"):
-        TimeDay=str(int(TimeDayTemp))+'-'+str(int(TimeDayTemp)+1)
-    elif (TimeDayFlag=="2"):
         TimeDay=str(int(TimeDayTemp)-1)+'-'+str(int(TimeDayTemp))
+    elif (TimeDayFlag=="2"):
+        print("The example  is: 05-08")
+        TimeDay=input()
     else:
         TimeDay=TimeDayTemp+'-'+TimeDayTemp
     

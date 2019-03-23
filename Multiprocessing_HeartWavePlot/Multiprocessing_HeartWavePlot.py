@@ -54,7 +54,7 @@ def CPU_Mem_Information_Initial():
 
     
 
-def DateProcess(DataBlock_total_rows,BCG_DataBlock,DataBlock_NumSer,M_queue,heartwaveDateProcess):
+def DateProcess(DataBlock_total_rows,BCG_DataBlock,DataBlock_NumSer,M_queue):
     #  12bit Heartbeat Signal  parameters
     ave_hrData = 2050.0
     std_hrData = 100.0
@@ -124,12 +124,11 @@ def DataObtain():
 
 
 
-def MultiProcesses(SpliceFactor,DataBlock_total_rows,BCG_DataBlock,M_queue,heartwaveDateProcess):
-    # with Manager() as mg:
-    #     heartwaveDateProcessTemp = mg.list()
+def MultiProcesses(SpliceFactor,DataBlock_total_rows,BCG_DataBlock,M_queue):
+    
     DeviceProcesses=[]
     for i in range(int(SpliceFactor)):
-        t =multiprocessing.Process(target=DateProcess, args=(DataBlock_total_rows,BCG_DataBlock[i],i,M_queue,heartwaveDateProcess))
+        t =multiprocessing.Process(target=DateProcess, args=(DataBlock_total_rows,BCG_DataBlock[i],i,M_queue))
         DeviceProcesses.append(t)
         t.start()
     
@@ -147,7 +146,7 @@ def MultiProcesses(SpliceFactor,DataBlock_total_rows,BCG_DataBlock,M_queue,heart
 def OneChannel_BCG_Plot(BCGX,BCGY,BCGxlabel,heartwave):
 
     fig=plt.figure()
-    #fig1
+    # fig1
     ax1=fig.add_subplot(2,1,1)  
     ax1.plot(BCGX,BCGY)
     ax1.grid(color='black', linestyle='--', linewidth=1,alpha=0.3)
@@ -156,7 +155,8 @@ def OneChannel_BCG_Plot(BCGX,BCGY,BCGxlabel,heartwave):
 
 
     # fig2
-    ax2=fig.add_subplot(2,1,2)  
+    ax2=fig.add_subplot(2,1,2) 
+    # ax2=fig.add_subplot(1,1,1)  
     ax2.plot(BCGX,heartwave)
     # ax3.plot(BCGX2,heartwave, color='red', label="16bit")
     # ax3.plot(BCGX, BCGY, color='red', label=BCGxlabel[0])
@@ -199,7 +199,7 @@ if __name__ == '__main__':
     print('DataBlock_total_rowslen'+'_'+str(len(HRWaveTemp[1])))
     print('MultiProcesses_Start')
 
-    MultiProcesses(SpliceFactor,DataBlock_total_rows,HRWaveTemp,M_queue,heartwaveDateProcess)
+    MultiProcesses(SpliceFactor,DataBlock_total_rows,HRWaveTemp,M_queue)
    
    
     while((M_queue.qsize())!=SpliceFactor):
