@@ -16,7 +16,7 @@ from numpy import arange
 import time
 
 
-DeviceNum_List="B2-B6-B7"
+DeviceNum_List="B7"
 #Define List
 Config_StartTime=[]
 Config_EndTime=[]
@@ -121,8 +121,8 @@ def Config_Write(TotalDays):
 
 
 def Download_ConfigFile_Input():
-    StartTime=input('Please Input the StartTime:')
-    EndTime=input('Please Input the  EndTime :')
+    StartTime=input('Please Input the StartTime(2019-03-08):')
+    EndTime=input('Please Input the  EndTime(2019-03-16):')
     print(StartTime+"_"+"To"+"_"+EndTime)
 
 

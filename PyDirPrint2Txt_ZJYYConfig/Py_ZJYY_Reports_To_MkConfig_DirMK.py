@@ -15,11 +15,10 @@ from numba import jit
 from numpy import arange
 import time
 
-#Define Path
-MkDirPath='H:/zjyy/三墩院区A6/Marked/20190222_20190307'
 
 #Define List
-DeviceNum_List="B2-B6-B7"
+# DeviceNum_List="B2-B6-B7"
+DeviceNum_List="B7"
 FileData=[]
 HumanData=[]
 StrConvertList=['00','01','02','03','04','05','06','07','08','09']
@@ -78,11 +77,11 @@ def StrCombine(NumSer):
 
     return DirStr,TotalStr
 
-def Config_Write(FileDataNum):   
+def Config_Write(FileDataNum,MkDirPath):   
         
         # Data=open(r"C:\Users\ScHWorkStation\Desktop\DataMark_ZJYY_FilePath.txt","w")
         print(FileDataNum)
-        Data=open(r"C:\Users\ScHWorkStation\Desktop\DataDownLoad_ZJYY_Config.txt","w")
+        Data=open(r"C:\Users\ScHWorkStation\Desktop\DataDownLoad_MKDIR_ZJYY_Config.txt","w")
 
         Data.write('http://data.91ganlu.com'+'\n')
         Data.write('http://10.248.248.61:9100'+'\n')
@@ -123,7 +122,13 @@ def Download_ConfigFile_Input():
     print(FileDirPath)
 
 
+    MkDirPath=input('Please Input the DirMakePath:')
+    print(MkDirPath)
+
+    
     file_name(FileDirPath)
+
+    return MkDirPath
   
     
 
@@ -133,5 +138,5 @@ def Download_ConfigFile_Input():
 if __name__ == '__main__':
 
     # while(1):
-    Download_ConfigFile_Input()
-    Config_Write(len(FileData))
+    MkDirPath=Download_ConfigFile_Input()
+    Config_Write(len(FileData),MkDirPath)
