@@ -82,7 +82,7 @@ def Config_Write(FileDataNum):
         
         # Data=open(r"C:\Users\ScHWorkStation\Desktop\DataMark_ZJYY_FilePath.txt","w")
         print(FileDataNum)
-        Data=open(r"C:\Users\ScHWorkStation\Desktop\DataMark_ZJYY_Config.txt","w")
+        Data=open(r"C:\Users\ScHWorkStation\Desktop\DataDownLoad_ZJYY_Config.txt","w")
 
         Data.write('http://data.91ganlu.com'+'\n')
         Data.write('http://10.248.248.61:9100'+'\n')
