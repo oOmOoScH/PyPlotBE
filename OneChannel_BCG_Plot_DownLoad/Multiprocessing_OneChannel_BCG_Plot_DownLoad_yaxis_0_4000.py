@@ -23,8 +23,8 @@ from TiStamp2Time import TStamp2Time
 
 
 
-#Define List
-DeviceID=[]
+# #Define List
+# DeviceID=[]
 
 # #Define Array
 # PlotData=np.zeros((0))
@@ -86,7 +86,7 @@ def OneChannel_BCG_Plot(DeviceID,TimeYM,TimeDay,StartTime,End_Time):
     print(DeviceID+":"+'Download_Sucess')
     ORGBCGDataTemp_New=ORGBCGData_New.split("\n") 
     ORGBCGDataTemp_NewLen=len(ORGBCGDataTemp_New)-1
-    print(DeviceID+":"+"Seconds_Total:"+str(ORGBCGDataTemp_NewLen))
+    print(DeviceID+"_"+"Seconds_Total:"+str(ORGBCGDataTemp_NewLen))
     for i in range (ORGBCGDataTemp_NewLen):
         BCGDataTemp=ORGBCGDataTemp_New[i]
         BCGDataTemp=BCGDataTemp.split("_")
@@ -101,17 +101,18 @@ def OneChannel_BCG_Plot(DeviceID,TimeYM,TimeDay,StartTime,End_Time):
         WholeDataTemp=WholeDataTemp+"-"+DataTemp
       
         if(i%(ORGBCGDataTemp_NewLen/5)==0):
-            print('i is %d of %s' %(i,str(ORGBCGDataTemp_NewLen)+"_"+DeviceID))
+            
+            print('i is %03d of %s' %(i,str(ORGBCGDataTemp_NewLen)+"_"+DeviceID))
        
 
     WholeData=WholeDataTemp.split("-")
     WholeData.pop(0)
     WholeData=[int(t) for t in WholeData]
 
-    print(DeviceID+":"+str(SingleDataTime[0]))
+    print(DeviceID+"__"+"FirstTimeStamp"+":"+str(SingleDataTime[0]))
 
     WholeDataLength=len(WholeData)
-    print(DeviceID+":"+str(WholeDataLength))
+    print(DeviceID+"_"+"WholeDataLength"+":"+str(WholeDataLength))
 
 
     BCGDataTimeTemp=SingleDataTime[0]
@@ -159,6 +160,7 @@ def BCG_Time_Input():
 
     print("Please Input the DeviceID")
     print("The example  is: bb30000200000000")
+    DeviceID=[]
     for i in range(int(PlotNum)):
         print('Input the DeviceID_%d Like the Form Above:' %(i))
         DeviceIDTemp=input()
@@ -178,7 +180,7 @@ def BCG_Time_Input():
     TimeDayTemp=time.strftime('%d',time.localtime(time.time()))
     print(TimeDayFlag)
         # print("The example  is: 01-02")
-    if(TimeDayFlag=="1"):
+    if (TimeDayFlag=="1"):
         TimeDay=str(int(TimeDayTemp)-1)+'-'+str(int(TimeDayTemp))
     elif (TimeDayFlag=="2"):
         print("The example  is: 05-08")
@@ -196,12 +198,13 @@ def BCG_Time_Input():
     End_Time=input('Input EndTime Hour-Minute:\n')
     
 
-    return PlotNum,TimeYM,TimeDay,StartTime,End_Time
+    return PlotNum,TimeYM,TimeDay,StartTime,End_Time,DeviceID
 
 
 
-def DeviceProcesses(PlotNum):
+def DeviceProcesses(PlotNum,DeviceID):
     DeviceProcesses=[]
+    print(DeviceID)
     for i in range(int(PlotNum)):
         t =multiprocessing.Process(target=OneChannel_BCG_Plot, args=(DeviceID[i],TimeYM,TimeDay,StartTime,End_Time))
         DeviceProcesses.append(t)
@@ -219,9 +222,9 @@ if __name__ == '__main__':
 
     while 1:
             
-        PlotNum,TimeYM,TimeDay,StartTime,End_Time=BCG_Time_Input()
+        PlotNum,TimeYM,TimeDay,StartTime,End_Time,DeviceID=BCG_Time_Input()
             
-        DeviceProcesses(PlotNum)
+        DeviceProcesses(PlotNum,DeviceID)
 
 
 
