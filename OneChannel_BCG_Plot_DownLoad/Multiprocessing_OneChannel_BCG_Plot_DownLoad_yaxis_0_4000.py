@@ -80,13 +80,21 @@ def OneChannel_BCG_Plot(DeviceID,TimeYM,TimeDay,StartTime,End_Time):
         print(DeviceID+":"+"Wait for Seconds The Internet is not good")
         ORGBCGData_New=Dataload(str(DeviceID), str(StartTimeStamp)+"000", str(End_Timestamp)+"000")
 
+    while str(ORGBCGData_New)=="already many thread download":
+        print(DeviceID+":"+"Wait for Seconds,Already Many Thread Downloading............")
+        ORGBCGData_New=Dataload(str(DeviceID), str(StartTimeStamp)+"000", str(End_Timestamp)+"000")
 
     
     start_time = time.time()
+
     print(DeviceID+":"+'Download_Sucess')
     ORGBCGDataTemp_New=ORGBCGData_New.split("\n") 
     ORGBCGDataTemp_NewLen=len(ORGBCGDataTemp_New)-1
     print(DeviceID+"_"+"Seconds_Total:"+str(ORGBCGDataTemp_NewLen))
+
+    
+
+
     for i in range (ORGBCGDataTemp_NewLen):
         BCGDataTemp=ORGBCGDataTemp_New[i]
         BCGDataTemp=BCGDataTemp.split("_")
@@ -109,7 +117,7 @@ def OneChannel_BCG_Plot(DeviceID,TimeYM,TimeDay,StartTime,End_Time):
     WholeData.pop(0)
     WholeData=[int(t) for t in WholeData]
 
-    print(DeviceID+"__"+"FirstTimeStamp"+":"+str(SingleDataTime[0]))
+    # print(DeviceID+"__"+"FirstTimeStamp"+":"+str(SingleDataTime[0]))
 
     WholeDataLength=len(WholeData)
     print(DeviceID+"_"+"WholeDataLength"+":"+str(WholeDataLength))
