@@ -19,7 +19,7 @@ import time
 # @jit
 def BCG_CsV_File_Plot():
     
-    BCGFile=input('please input the BCGFilePath:')
+    BCGFile=input('Please input the BCGFilePath:')
     print(BCGFile)
    
 

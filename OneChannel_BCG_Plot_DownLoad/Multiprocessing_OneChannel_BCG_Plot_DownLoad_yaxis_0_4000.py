@@ -172,6 +172,8 @@ def BCG_Time_Input():
     for i in range(int(PlotNum)):
         print('Input the DeviceID_%d Like the Form Above:' %(i))
         DeviceIDTemp=input()
+        if(len(DeviceIDTemp)>16):
+            DeviceIDTemp=DeviceIDTemp[0:16]
         DeviceID.append(DeviceIDTemp)
 
     print("Input StartTime Year & Month")
